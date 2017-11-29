@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import PropTypes from 'prop-types';
+import axios from 'axios'
 
 const Patita = () => {
   return (
@@ -34,7 +35,8 @@ class App extends Component {
     this.state = {
       greetings: [],
       goodbyes: "good bye",
-      count: 0
+      count: 0,
+      stuff: {}
     };
   }
 
@@ -74,7 +76,15 @@ class App extends Component {
       }
     ];
 
-    this.setState({ greetings });
+    const componentThis = this
+    const stuff = axios.get('https://httpbin.org/get')
+      .then((res) => {
+        componentThis.setState({ greetings, stuff: res.data });
+        console.log(`stuff=${componentThis.state.stuff}`)
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   render() {
@@ -92,6 +102,7 @@ class App extends Component {
         <button onClick={(event) => this.decreaseCount(event, 'extra-param')}>-</button>
         <button onClick={(event) => this.increaseCount(event)}>+</button>
         <div>count: {this.state.count}</div>
+        <div>{this.state.stuff.url}</div>
       </div>
     );
   }
