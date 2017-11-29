@@ -13,4 +13,3 @@ This is the front-end side of the project!
 * To [Fernando Montes](https://github.com/ferzerkerx) for his support and patience.
 * To [WTMB](http://wtmberlin.com/) for organizing the [JavaScript Crash Course](http://wtmberlin.com/javascript-crash-course/).
 * To my Mom (who does not have a GitHub account yet) for never giving up :)
-
