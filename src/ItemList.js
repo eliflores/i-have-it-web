@@ -81,6 +81,7 @@ export class ItemList extends Component {
 
     render() {
         const items = this.renderItems();
+        const modalTitle = this.isEditingItem() ? 'Edit Item' : 'Add Item';
         const itemElement = this.state.selectedItem && (
             <span>
                 <FormGroup className='i-have-it-item-field'>
@@ -119,7 +120,7 @@ export class ItemList extends Component {
                 <Modal show={this.state.showModal} onHide={this.close}>
                     <form onSubmit={(event) => this.saveItem(event)}>
                         <Modal.Header closeButton>
-                            <Modal.Title>Edit Item</Modal.Title>
+                            <Modal.Title>{modalTitle}</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
                             {itemElement}
