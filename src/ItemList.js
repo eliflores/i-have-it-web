@@ -2,8 +2,25 @@ import React, { Component } from 'react';
 import { Item } from './Item'
 import PropTypes from 'prop-types';
 import Grid from 'react-bootstrap/lib/Grid';
+import Modal from 'react-bootstrap/lib/Modal';
+import Button from 'react-bootstrap/lib/Button';
 
 export class ItemList extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            showModal: false
+        };
+    }
+
+    close = () => {
+        this.setState({ showModal: false });
+    }
+
+    open = () => {
+        this.setState({ showModal: true });
+    }
+
     propTypes = {
         items: PropTypes.object.isRequired
     };
@@ -20,9 +37,23 @@ export class ItemList extends Component {
     render() {
         const items = this.getItems();
         return (
-            <Grid>
-                {items}
-            </Grid>
+            <div>
+                <Grid>
+                    {items}
+                </Grid>
+                <Button onClick={this.open}>Open</Button>
+                <Modal show={this.state.showModal} onHide={this.close}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Modal heading</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        Foo Bla
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button onClick={this.close}>Close</Button>
+                    </Modal.Footer>
+                </Modal>
+            </div>
         );
     }
 }
