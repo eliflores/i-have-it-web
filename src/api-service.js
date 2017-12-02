@@ -16,15 +16,31 @@ export const saveItem = (item) => {
     return axios.post(`${HOST}/item/${item.id}/quantity`, { quantity: item.quantity })
         .then(res => {
             return res.data;
+        })
+        .catch(error => {
+            console.log(error);
         });
 }
 
 export const deleteItem = (itemId) => {
     return axios.delete(`${HOST}/item/${itemId}`)
         .then(res => {
-            if (res.data == 'OK!') {
+            if (res.data === 'OK!') {
                 return Promise.resolve(res.data);
             }
             return Promise.reject('err');
+        })
+        .catch(error => {
+            console.log(error);
+        });
+}
+
+export const addItem = (item) => {
+    return axios.post(`${HOST}/item/`, item)
+        .then(res => {
+            return res.data;
+        })
+        .catch(error => {
+            console.log(error);
         });
 }

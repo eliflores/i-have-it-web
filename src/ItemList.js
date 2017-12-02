@@ -19,14 +19,25 @@ export class ItemList extends Component {
         };
     }
 
+    isEditingItem = () => {
+        return this.state.action === 'edit';
+    }
+
     saveItem = (event) => {
         event.preventDefault();
-        const itemQuantity = event.target.quantity.value;
         const itemId = event.target.id.value;
-        this.props.saveItemHandler({ id: itemId, quantity: itemQuantity }, () => {
-            this.close();
-        });
-
+        const itemQuantity = event.target.quantity.value;
+        const itemName = event.target.name.value
+        
+        if (this.isEditingItem()) {
+            this.props.saveItemHandler({ id: itemId, quantity: itemQuantity }, () => {
+                this.close();
+            });
+        } else {
+            this.props.addItemHandler({ name: itemName, quantity: itemQuantity }, () => {
+                this.close();
+            });
+        }
     }
 
     close = () => {
@@ -46,13 +57,14 @@ export class ItemList extends Component {
     }
 
     newItem = () => {
-        this.open({ name: '', quantity: 0 }, 'add');
+        this.open({ name: '', quantity: '' }, 'add');
     }
 
     propTypes = {
         items: PropTypes.object.isRequired,
         saveItemHandler: PropTypes.func.isRequired,
-        deleteItemHandler: PropTypes.func.isRequired
+        deleteItemHandler: PropTypes.func.isRequired,
+        addItemHandler: PropTypes.func.isRequired
     };
 
     renderItems = () => {
@@ -69,7 +81,6 @@ export class ItemList extends Component {
 
     render() {
         const items = this.renderItems();
-        const editingItem = this.state.action == 'edit';
         const itemElement = this.state.selectedItem && (
             <span>
                 <FormGroup className='i-have-it-item-field'>
@@ -79,7 +90,7 @@ export class ItemList extends Component {
                         type="text"
                         placeholder="Enter name"
                         defaultValue={this.state.selectedItem.name}
-                        disabled={editingItem}
+                        disabled={this.isEditingItem()}
                     />
                 </FormGroup>
                 <FormGroup className='i-have-it-item-field'>
