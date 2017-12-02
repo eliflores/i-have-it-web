@@ -1,0 +1,10 @@
+.Item {
+    text-align: center;
+    font-size: medium;
+    padding-top: 20px;
+  }
+  
+  .Item-name {
+    color: rgb(18, 74, 97);
+    font-weight: bold;
+  }
