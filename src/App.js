@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import { Item } from './Item'
 import { fetchItems } from './api-service';
+import Grid from 'react-bootstrap/lib/Grid';
 
 class App extends Component {
   constructor(props) {
@@ -30,7 +31,11 @@ class App extends Component {
         <header className="App-header">
           <h1 className="App-title">iHave It</h1>
         </header>
-        {items}
+        <div className="container">
+          <Grid>
+            {items}
+          </Grid>
+        </div>
       </div>
     );
   }

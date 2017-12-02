@@ -8,3 +8,15 @@
     color: rgb(18, 74, 97);
     font-weight: bold;
   }
+  
+  .Col-name {
+      text-align: right;
+  }
+
+  .Col-quantity {
+    text-align: left;
+  }
+
+  .Col-actions {
+      text-align: left;
+  }
