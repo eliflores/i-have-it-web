@@ -8,7 +8,8 @@ import Button from 'react-bootstrap/lib/Button';
 export class Item extends Component {
     propTypes = {
         name: PropTypes.string.isRequired,
-        quantity: PropTypes.number.isRequired
+        quantity: PropTypes.number.isRequired,
+        onEditItem: PropTypes.func.isRequired
     };
 
     render() {
@@ -21,7 +22,7 @@ export class Item extends Component {
                     <span className='Item-quantity'>{this.props.quantity}</span>
                 </Col>
                 <Col md={5} className='Col-actions'>
-                    <Button bsStyle="info" className='fa fa-pencil fa-1 btn-sm' aria-hidden='true'></Button>
+                    <Button bsStyle="info" className='fa fa-pencil fa-1 btn-sm' aria-hidden='true' onClick={this.props.onEditItem}></Button>
                     <Button bsStyle="danger" className='fa fa-window-close-o fa-1 btn-sm' aria-hidden='true'></Button>
                 </Col>
             </Row>

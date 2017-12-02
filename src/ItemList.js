@@ -30,7 +30,7 @@ export class ItemList extends Component {
         return this.props.items.map(i => {
             console.log(`This is the item name ${i.name}`);
             console.log(`This is the item name ${i.quantity}`);
-            return <Item key={i.id} name={i.name} quantity={i.quantity} />
+            return <Item key={i.id} name={i.name} quantity={i.quantity} onEditItem={this.open} />
         });
     };
 
@@ -41,7 +41,6 @@ export class ItemList extends Component {
                 <Grid>
                     {items}
                 </Grid>
-                <Button onClick={this.open}>Open</Button>
                 <Modal show={this.state.showModal} onHide={this.close}>
                     <Modal.Header closeButton>
                         <Modal.Title>Modal heading</Modal.Title>
