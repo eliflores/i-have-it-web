@@ -14,8 +14,18 @@ export class ItemList extends Component {
         super(props);
         this.state = {
             showModal: false,
-            selectedItem: undefined
+            selectedItem: undefined,
         };
+    }
+
+    saveItem = (event) => {
+        event.preventDefault();
+        const itemQuantity = event.target.quantity.value;
+        const itemId = event.target.id.value;
+        this.props.saveItemHandler({id: itemId, quantity: itemQuantity}, () => {
+            this.close();
+        });
+        
     }
 
     close = () => {
@@ -27,7 +37,8 @@ export class ItemList extends Component {
     }
 
     propTypes = {
-        items: PropTypes.object.isRequired
+        items: PropTypes.object.isRequired,
+        saveItemHandler: PropTypes.func.isRequired
     };
 
     getItems = () => {
@@ -39,19 +50,25 @@ export class ItemList extends Component {
     render() {
         const items = this.getItems();
         const itemElement = this.state.selectedItem && (
-            <form>
+            <span>
                 <FormGroup>
                     <ControlLabel>Name:</ControlLabel> {this.state.selectedItem.name}
                 </FormGroup>
                 <FormGroup className='Item-quantity'>
                     <ControlLabel>Quantity: </ControlLabel>
                     <FormControl
+                        name="quantity"
                         type="text"
                         placeholder="Enter quantity"
                         defaultValue={this.state.selectedItem.quantity}
                     />
+                    <FormControl
+                        name="id"
+                        type="hidden"
+                        defaultValue={this.state.selectedItem.id}
+                    />
                 </FormGroup>
-            </form>
+            </span>
         );
 
         return (
@@ -60,16 +77,18 @@ export class ItemList extends Component {
                     {items}
                 </Grid>
                 <Modal show={this.state.showModal} onHide={this.close}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>Edit Item</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        {itemElement}
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button onClick={this.close}>Save</Button>
-                        <Button onClick={this.close}>Close</Button>
-                    </Modal.Footer>
+                    <form onSubmit={(event) => this.saveItem(event)}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Edit Item</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            {itemElement}
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button type='submit'>Save</Button>
+                            <Button onClick={this.close}>Close</Button>
+                        </Modal.Footer>
+                    </form>
                 </Modal>
             </div>
         );

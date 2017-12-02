@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { ItemList } from './ItemList'
-import { fetchItems } from './api-service';
+import { fetchItems, saveItem } from './api-service';
 
 class App extends Component {
   constructor(props) {
@@ -12,9 +12,20 @@ class App extends Component {
     };
   }
 
+  saveItemHandler = (item, callback) => {
+    saveItem(item).then(res => {
+      callback();
+      const currentItems = this.state.items.slice();
+      const itemIndex = currentItems.findIndex(i => {
+        return i.id == item.id
+      });
+      currentItems[itemIndex] = {...currentItems[itemIndex], ...item};
+      this.setState({ items: currentItems });
+    });
+  }
+
   componentDidMount() {
-    fetchItems().then((res) => {
-      console.log(`items: ${res}`)
+    fetchItems().then(res => {
       this.setState({ items: res });
     });
   }
@@ -26,7 +37,7 @@ class App extends Component {
           <i className="fa fa-check-square-o" aria-hidden="true"></i>
           <span className="App-title"> iHave It</span>
         </header>
-        <ItemList items={this.state.items} />
+        <ItemList items={this.state.items} saveItemHandler={this.saveItemHandler} />
       </div>
     );
   }
