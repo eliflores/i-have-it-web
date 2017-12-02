@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { ItemList } from './ItemList'
-import { fetchItems, saveItem } from './api-service';
+import { fetchItems, saveItem, deleteItem } from './api-service';
 
 class App extends Component {
   constructor(props) {
@@ -16,11 +16,25 @@ class App extends Component {
     saveItem(item).then(res => {
       callback();
       const currentItems = this.state.items.slice();
-      const itemIndex = currentItems.findIndex(i => {
-        return i.id == item.id
-      });
-      currentItems[itemIndex] = {...currentItems[itemIndex], ...item};
+      const itemIndex = this.findItem(item.id);
+      currentItems[itemIndex] = { ...currentItems[itemIndex], ...item };
       this.setState({ items: currentItems });
+    });
+  }
+
+  deleteItemHandler = (itemId) => {
+    deleteItem(itemId)
+      .then(res => {
+        const currentItems = this.state.items.slice();
+        const itemIndex = this.findItem(itemId);
+        currentItems.splice(itemIndex, 1);
+        this.setState({ items: currentItems });
+      });
+  }
+
+  findItem = (itemId) => {
+    return this.state.items.findIndex(i => {
+      return i.id == itemId;
     });
   }
 
@@ -37,7 +51,7 @@ class App extends Component {
           <i className="fa fa-check-square-o" aria-hidden="true"></i>
           <span className="App-title"> iHave It</span>
         </header>
-        <ItemList items={this.state.items} saveItemHandler={this.saveItemHandler} />
+        <ItemList items={this.state.items} saveItemHandler={this.saveItemHandler} deleteItemHandler={this.deleteItemHandler} />
       </div>
     );
   }

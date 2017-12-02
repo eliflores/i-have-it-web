@@ -18,3 +18,13 @@ export const saveItem = (item) => {
             return res.data;
         });
 }
+
+export const deleteItem = (itemId) => {
+    return axios.delete(`${HOST}/item/${itemId}`)
+        .then(res => {
+            if (res.data == 'OK!') {
+                return Promise.resolve(res.data);
+            }
+            return Promise.reject('err');
+        });
+}

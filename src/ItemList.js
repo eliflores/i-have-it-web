@@ -32,18 +32,19 @@ export class ItemList extends Component {
         this.setState({ showModal: false });
     }
 
-    open = (item) => {
-        this.setState({ showModal: true, selectedItem: item });
+    deleteItem = (itemId) => {
+        this.props.deleteItemHandler(itemId);
     }
 
     propTypes = {
         items: PropTypes.object.isRequired,
-        saveItemHandler: PropTypes.func.isRequired
+        saveItemHandler: PropTypes.func.isRequired,
+        deleteItemHandler: PropTypes.func.isRequired
     };
 
     getItems = () => {
         return this.props.items && this.props.items.map(i => {
-            return <Item key={i.id} name={i.name} quantity={i.quantity} onEditItem={() => this.open(i)} />
+            return <Item key={i.id} name={i.name} quantity={i.quantity} onEditItem={() => this.open(i)} onDeleteItem={() => this.deleteItem(i.id)} />
         });
     };
 

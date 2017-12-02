@@ -9,7 +9,8 @@ export class Item extends Component {
     propTypes = {
         name: PropTypes.string.isRequired,
         quantity: PropTypes.number.isRequired,
-        onEditItem: PropTypes.func.isRequired
+        onEditItem: PropTypes.func.isRequired,
+        onDeleteItem: PropTypes.func.isRequired
     };
 
     render() {
@@ -23,7 +24,7 @@ export class Item extends Component {
                 </Col>
                 <Col md={5} className='Col-actions'>
                     <Button bsStyle="info" className='fa fa-pencil fa-1 btn-sm' aria-hidden='true' onClick={this.props.onEditItem}></Button>
-                    <Button bsStyle="danger" className='fa fa-window-close-o fa-1 btn-sm' aria-hidden='true'></Button>
+                    <Button bsStyle="danger" className='fa fa-window-close-o fa-1 btn-sm' aria-hidden='true' onClick={this.props.onDeleteItem}></Button>
                 </Col>
             </Row>
         );
