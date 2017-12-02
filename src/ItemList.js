@@ -47,8 +47,8 @@ export class ItemList extends Component {
                     <ControlLabel>Quantity: </ControlLabel>
                     <FormControl
                         type="text"
-                        value={this.state.selectedItem.quantity}
                         placeholder="Enter quantity"
+                        defaultValue={this.state.selectedItem.quantity}
                     />
                 </FormGroup>
             </form>
@@ -67,6 +67,7 @@ export class ItemList extends Component {
                         {itemElement}
                     </Modal.Body>
                     <Modal.Footer>
+                        <Button onClick={this.close}>Save</Button>
                         <Button onClick={this.close}>Close</Button>
                     </Modal.Footer>
                 </Modal>
