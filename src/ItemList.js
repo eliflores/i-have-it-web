@@ -32,6 +32,10 @@ export class ItemList extends Component {
         this.setState({ showModal: false });
     }
 
+    open = (item) => {
+        this.setState({ showModal: true, selectedItem: item });
+    }
+
     deleteItem = (itemId) => {
         this.props.deleteItemHandler(itemId);
     }
