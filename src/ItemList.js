@@ -10,6 +10,13 @@ import FormControl from 'react-bootstrap/lib/FormControl';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 
 export class ItemList extends Component {
+    static propTypes = {
+        items: PropTypes.array.isRequired,
+        saveItemHandler: PropTypes.func.isRequired,
+        deleteItemHandler: PropTypes.func.isRequired,
+        addItemHandler: PropTypes.func.isRequired
+    };
+
     constructor(props) {
         super(props);
         this.state = {
@@ -29,14 +36,14 @@ export class ItemList extends Component {
         const itemQuantity = event.target.quantity.value;
         const itemName = event.target.name.value;
         const modalClose = () => this.close();
-        
+
         if (this.isEditingItem()) {
             this.props.saveItemHandler({ id: itemId, quantity: itemQuantity })
-            .then(modalClose);
-        
+                .then(modalClose);
+
         } else {
             this.props.addItemHandler({ name: itemName, quantity: itemQuantity })
-            .then(modalClose);
+                .then(modalClose);
         }
     }
 
@@ -60,13 +67,6 @@ export class ItemList extends Component {
         this.open({ name: '', quantity: '' }, 'add');
     }
 
-    propTypes = {
-        items: PropTypes.object.isRequired,
-        saveItemHandler: PropTypes.func.isRequired,
-        deleteItemHandler: PropTypes.func.isRequired,
-        addItemHandler: PropTypes.func.isRequired
-    };
-
     renderItems = () => {
         return this.props.items && this.props.items.map(i => {
             return (
@@ -79,10 +79,9 @@ export class ItemList extends Component {
         });
     };
 
-    render() {
-        const items = this.renderItems();
-        const modalTitle = this.isEditingItem() ? 'Edit Item' : 'Add Item';
-        const itemElement = this.state.selectedItem && (
+    renderModalForm = () => {
+        const selectedItem = { ...this.state.selectedItem };
+        return selectedItem && (
             <span>
                 <FormGroup className='i-have-it-item-field'>
                     <ControlLabel>Name:</ControlLabel>
@@ -90,7 +89,7 @@ export class ItemList extends Component {
                         name="name"
                         type="text"
                         placeholder="Enter name"
-                        defaultValue={this.state.selectedItem.name}
+                        defaultValue={selectedItem.name}
                         disabled={this.isEditingItem()}
                     />
                 </FormGroup>
@@ -100,16 +99,22 @@ export class ItemList extends Component {
                         name="quantity"
                         type="text"
                         placeholder="Enter quantity"
-                        defaultValue={this.state.selectedItem.quantity}
+                        defaultValue={selectedItem.quantity}
                     />
                     <FormControl
                         name="id"
                         type="hidden"
-                        defaultValue={this.state.selectedItem.id}
+                        defaultValue={selectedItem.id}
                     />
                 </FormGroup>
             </span>
         );
+    }
+
+    render() {
+        const items = this.renderItems();
+        const modalTitle = this.isEditingItem() ? 'Edit Item' : 'Add Item';
+        const itemElement = this.renderModalForm();
 
         return (
             <div>

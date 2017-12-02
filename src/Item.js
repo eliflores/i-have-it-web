@@ -6,7 +6,7 @@ import Col from 'react-bootstrap/lib/Col';
 import Button from 'react-bootstrap/lib/Button';
 
 export class Item extends Component {
-    propTypes = {
+    static propTypes = {
         name: PropTypes.string.isRequired,
         quantity: PropTypes.number.isRequired,
         onEditItem: PropTypes.func.isRequired,

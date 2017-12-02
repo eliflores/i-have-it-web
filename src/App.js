@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { ItemList } from './ItemList'
 import { fetchItems, saveItem, deleteItem, addItem } from './api-service';
-import Button from 'react-bootstrap/lib/Button';
 
 class App extends Component {
   constructor(props) {
@@ -45,7 +43,7 @@ class App extends Component {
 
   findItem = (itemId) => {
     return this.state.items.findIndex(i => {
-      return i.id == itemId;
+      return i.id === itemId;
     });
   }
 
