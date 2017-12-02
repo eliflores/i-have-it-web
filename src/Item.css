@@ -20,3 +20,7 @@
   .Col-actions {
       text-align: left;
   }
+
+  .Col-actions .btn {
+        margin-right: 5px;
+  }

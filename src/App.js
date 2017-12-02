@@ -27,16 +27,15 @@ class App extends Component {
   render() {
     const items = this.getItems();
     return (
-      <div className="App">
+      <div className="App container">
         <header className="App-header">
-          <h1 className="App-title">iHave It</h1>
+          <i className="fa fa-check-square-o" aria-hidden="true"></i>
+          <span className="App-title"> iHave It</span>
         </header>
-        <div className="container">
           <Grid>
             {items}
           </Grid>
         </div>
-      </div>
     );
   }
 }

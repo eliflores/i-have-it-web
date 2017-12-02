@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import './Item.css';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
+import Button from 'react-bootstrap/lib/Button';
 
 export class Item extends Component {
     propTypes = {
@@ -13,13 +14,16 @@ export class Item extends Component {
     render() {
         return (
             <Row className='Item show-grid'>
-                <Col xs={6} className='Col-name'>
+                <Col md={6} className='Col-name'>
                     <span className='Item-name'>{this.props.name}</span>
                 </Col>
-                <Col xs={1} className='Col-quantity'>
+                <Col md={1} className='Col-quantity'>
                     <span className='Item-quantity'>{this.props.quantity}</span>
                 </Col>
-                <Col xs={3} className='Col-actions'>Foo</Col>
+                <Col md={5} className='Col-actions'>
+                    <Button bsStyle="info" className='fa fa-pencil fa-1 btn-sm' aria-hidden='true'></Button>
+                    <Button bsStyle="danger" className='fa fa-window-close-o fa-1 btn-sm' aria-hidden='true'></Button>
+                </Col>
             </Row>
         );
     }
