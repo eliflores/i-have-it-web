@@ -9,7 +9,8 @@ export class ItemList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            showModal: false
+            showModal: false,
+            selectedItem: undefined
         };
     }
 
@@ -17,8 +18,8 @@ export class ItemList extends Component {
         this.setState({ showModal: false });
     }
 
-    open = () => {
-        this.setState({ showModal: true });
+    open = (item) => {
+        this.setState({ showModal: true, selectedItem: item });
     }
 
     propTypes = {
@@ -26,16 +27,20 @@ export class ItemList extends Component {
     };
 
     getItems = () => {
-        console.log(`This is the items ${this.props.items}`);
         return this.props.items.map(i => {
-            console.log(`This is the item name ${i.name}`);
-            console.log(`This is the item name ${i.quantity}`);
-            return <Item key={i.id} name={i.name} quantity={i.quantity} onEditItem={this.open} />
+            return <Item key={i.id} name={i.name} quantity={i.quantity} onEditItem={() => this.open(i)} />
         });
     };
 
     render() {
         const items = this.getItems();
+        const itemElement = this.state.selectedItem && (
+            <span>
+                Name: {this.state.selectedItem.name}
+                Quantity: {this.state.selectedItem.quantity}
+            </span>
+        );
+
         return (
             <div>
                 <Grid>
@@ -43,10 +48,10 @@ export class ItemList extends Component {
                 </Grid>
                 <Modal show={this.state.showModal} onHide={this.close}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Modal heading</Modal.Title>
+                        <Modal.Title>Edit Item</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        Foo Bla
+                        {itemElement}
                     </Modal.Body>
                     <Modal.Footer>
                         <Button onClick={this.close}>Close</Button>
