@@ -2,45 +2,40 @@ import axios from 'axios'
 
 const HOST = 'http://localhost:3000';
 
+const errorHandler = (error) => {
+    console.log(error);
+}
+
+const parseResponse = (response) => {
+    return response.data;
+};
+
 export const fetchItems = () => {
     return axios.get(`${HOST}/item`)
-        .then(res => {
-            return res.data;
-        })
-        .catch(error => {
-            console.log(error);
-        });
+        .then(parseResponse)
+        .catch(errorHandler);
 };
 
 export const saveItem = (item) => {
     return axios.post(`${HOST}/item/${item.id}/quantity`, { quantity: item.quantity })
-        .then(res => {
-            return res.data;
-        })
-        .catch(error => {
-            console.log(error);
-        });
-}
-
-export const deleteItem = (itemId) => {
-    return axios.delete(`${HOST}/item/${itemId}`)
-        .then(res => {
-            if (res.data === 'OK!') {
-                return Promise.resolve(res.data);
-            }
-            return Promise.reject('err');
-        })
-        .catch(error => {
-            console.log(error);
-        });
+        .then(parseResponse)
+        .catch(errorHandler);
 }
 
 export const addItem = (item) => {
     return axios.post(`${HOST}/item/`, item)
-        .then(res => {
-            return res.data;
+        .then(parseResponse)
+        .catch(errorHandler);
+}
+
+export const deleteItem = (itemId) => {
+    return axios.delete(`${HOST}/item/${itemId}`)
+        .then(parseResponse)
+        .then(data => {
+            if (data === 'OK!') {
+                return Promise.resolve(data);
+            }
+            return Promise.reject('err');
         })
-        .catch(error => {
-            console.log(error);
-        });
+        .catch(errorHandler);
 }
