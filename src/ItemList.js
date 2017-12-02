@@ -27,16 +27,16 @@ export class ItemList extends Component {
         event.preventDefault();
         const itemId = event.target.id.value;
         const itemQuantity = event.target.quantity.value;
-        const itemName = event.target.name.value
+        const itemName = event.target.name.value;
+        const modalClose = () => this.close();
         
         if (this.isEditingItem()) {
-            this.props.saveItemHandler({ id: itemId, quantity: itemQuantity }, () => {
-                this.close();
-            });
+            this.props.saveItemHandler({ id: itemId, quantity: itemQuantity })
+            .then(modalClose);
+        
         } else {
-            this.props.addItemHandler({ name: itemName, quantity: itemQuantity }, () => {
-                this.close();
-            });
+            this.props.addItemHandler({ name: itemName, quantity: itemQuantity })
+            .then(modalClose);
         }
     }
 

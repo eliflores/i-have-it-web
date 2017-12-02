@@ -13,13 +13,13 @@ class App extends Component {
     };
   }
 
-  saveItemHandler = (item, callback) => {
-    saveItem(item).then(res => {
-      callback();
+  saveItemHandler = (item) => {
+    return saveItem(item).then(res => {
       const currentItems = this.state.items.slice();
       const itemIndex = this.findItem(item.id);
       currentItems[itemIndex] = { ...currentItems[itemIndex], ...item };
       this.setState({ items: currentItems });
+      return Promise.resolve();
     });
   }
 
@@ -33,13 +33,13 @@ class App extends Component {
       });
   }
 
-  addItemHandler = (item, callback) => {
-    addItem(item)
+  addItemHandler = (item) => {
+    return addItem(item)
       .then(res => {
-        callback();
         const currentItems = this.state.items.slice();
         currentItems.push(res);
         this.setState({ items: currentItems });
+        return Promise.resolve();
       });
   }
 
