@@ -15,6 +15,7 @@ export class ItemList extends Component {
         this.state = {
             showModal: false,
             selectedItem: undefined,
+            action: 'edit',
         };
     }
 
@@ -22,22 +23,30 @@ export class ItemList extends Component {
         event.preventDefault();
         const itemQuantity = event.target.quantity.value;
         const itemId = event.target.id.value;
-        this.props.saveItemHandler({id: itemId, quantity: itemQuantity}, () => {
+        this.props.saveItemHandler({ id: itemId, quantity: itemQuantity }, () => {
             this.close();
         });
-        
+
     }
 
     close = () => {
         this.setState({ showModal: false });
     }
 
-    open = (item) => {
-        this.setState({ showModal: true, selectedItem: item });
+    open = (item, action) => {
+        this.setState({ showModal: true, selectedItem: item, action });
     }
 
     deleteItem = (itemId) => {
         this.props.deleteItemHandler(itemId);
+    }
+
+    editItem = (item) => {
+        this.open(item, 'edit');
+    }
+
+    newItem = () => {
+        this.open({ name: '', quantity: 0 }, 'add');
     }
 
     propTypes = {
@@ -48,18 +57,32 @@ export class ItemList extends Component {
 
     renderItems = () => {
         return this.props.items && this.props.items.map(i => {
-            return <Item key={i.id} name={i.name} quantity={i.quantity} onEditItem={() => this.open(i)} onDeleteItem={() => this.deleteItem(i.id)} />
+            return (
+                <Item key={i.id}
+                    name={i.name}
+                    quantity={i.quantity}
+                    onEditItem={() => this.editItem(i)}
+                    onDeleteItem={() => this.deleteItem(i.id)} />
+            );
         });
     };
 
     render() {
         const items = this.renderItems();
+        const editingItem = this.state.action == 'edit';
         const itemElement = this.state.selectedItem && (
             <span>
-                <FormGroup>
-                    <ControlLabel>Name:</ControlLabel> {this.state.selectedItem.name}
+                <FormGroup className='i-have-it-item-field'>
+                    <ControlLabel>Name:</ControlLabel>
+                    <FormControl
+                        name="name"
+                        type="text"
+                        placeholder="Enter name"
+                        defaultValue={this.state.selectedItem.name}
+                        disabled={editingItem}
+                    />
                 </FormGroup>
-                <FormGroup className='Item-quantity'>
+                <FormGroup className='i-have-it-item-field'>
                     <ControlLabel>Quantity: </ControlLabel>
                     <FormControl
                         name="quantity"
@@ -78,6 +101,7 @@ export class ItemList extends Component {
 
         return (
             <div>
+                <Button bsStyle="success" className='fa fa-plus pull-right' aria-hidden='true' onClick={this.newItem}></Button>
                 <Grid>
                     {items}
                 </Grid>

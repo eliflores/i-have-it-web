@@ -52,7 +52,6 @@ class App extends Component {
           <i className="fa fa-check-square-o" aria-hidden="true"></i>
           <span className="App-title"> iHave It</span>
         </header>
-        <Button bsStyle="success" className='fa fa-plus pull-right' aria-hidden='true'></Button>
         <ItemList items={this.state.items} saveItemHandler={this.saveItemHandler} deleteItemHandler={this.deleteItemHandler} />
       </div>
     );
