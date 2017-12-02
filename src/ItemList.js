@@ -31,7 +31,7 @@ export class ItemList extends Component {
     };
 
     getItems = () => {
-        return this.props.items.map(i => {
+        return this.props.items && this.props.items.map(i => {
             return <Item key={i.id} name={i.name} quantity={i.quantity} onEditItem={() => this.open(i)} />
         });
     };

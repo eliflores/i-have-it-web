@@ -13,8 +13,10 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const items = fetchItems();
-    this.setState({ items });
+    fetchItems().then((res) => {
+      console.log(`items: ${res}`)
+      this.setState({ items: res });
+    });
   }
 
   render() {
