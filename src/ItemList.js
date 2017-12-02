@@ -42,14 +42,14 @@ export class ItemList extends Component {
         deleteItemHandler: PropTypes.func.isRequired
     };
 
-    getItems = () => {
+    renderItems = () => {
         return this.props.items && this.props.items.map(i => {
             return <Item key={i.id} name={i.name} quantity={i.quantity} onEditItem={() => this.open(i)} onDeleteItem={() => this.deleteItem(i.id)} />
         });
     };
 
     render() {
-        const items = this.getItems();
+        const items = this.renderItems();
         const itemElement = this.state.selectedItem && (
             <span>
                 <FormGroup>
