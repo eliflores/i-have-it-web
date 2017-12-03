@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Item } from './Item'
+import React, {Component} from 'react';
+import {Item} from './Item'
 import './ItemList.css';
 import PropTypes from 'prop-types';
 import Grid from 'react-bootstrap/lib/Grid';
@@ -38,21 +38,21 @@ export class ItemList extends Component {
         const modalClose = () => this.close();
 
         if (this.isEditingItem()) {
-            this.props.saveItemHandler({ id: itemId, quantity: itemQuantity })
+            this.props.saveItemHandler({id: itemId, quantity: itemQuantity})
                 .then(modalClose);
 
         } else {
-            this.props.addItemHandler({ name: itemName, quantity: itemQuantity })
+            this.props.addItemHandler({name: itemName, quantity: itemQuantity})
                 .then(modalClose);
         }
     }
 
     close = () => {
-        this.setState({ showModal: false });
+        this.setState({showModal: false});
     }
 
     open = (item, action) => {
-        this.setState({ showModal: true, selectedItem: item, action });
+        this.setState({showModal: true, selectedItem: item, action});
     }
 
     deleteItem = (itemId) => {
@@ -64,23 +64,23 @@ export class ItemList extends Component {
     }
 
     newItem = () => {
-        this.open({ name: '', quantity: '' }, 'add');
+        this.open({name: '', quantity: ''}, 'add');
     }
 
     renderItems = () => {
         return this.props.items && this.props.items.map(i => {
             return (
                 <Item key={i.id}
-                    name={i.name}
-                    quantity={i.quantity}
-                    onEditItem={() => this.editItem(i)}
-                    onDeleteItem={() => this.deleteItem(i.id)} />
+                      name={i.name}
+                      quantity={i.quantity}
+                      onEditItem={() => this.editItem(i)}
+                      onDeleteItem={() => this.deleteItem(i.id)}/>
             );
         });
     };
 
     renderModalForm = () => {
-        const selectedItem = { ...this.state.selectedItem };
+        const selectedItem = {...this.state.selectedItem};
         return selectedItem && (
             <span>
                 <FormGroup className='i-have-it-item-field'>
@@ -118,14 +118,18 @@ export class ItemList extends Component {
 
         return (
             <div>
-                <Button bsStyle="success" className='fa fa-plus pull-right' aria-hidden='true' onClick={this.newItem}></Button>
+                <div>
+                    <Button bsStyle="success" className='fa fa-check pull-center' aria-hidden='true'
+                            onClick={this.newItem}> iHaveIt </Button>
+                </div>
                 <Grid>
                     {items}
                 </Grid>
                 <Modal show={this.state.showModal} onHide={this.close}>
                     <form onSubmit={(event) => this.saveItem(event)}>
                         <Modal.Header closeButton>
-                            <Modal.Title>{modalTitle}</Modal.Title>
+                            <Modal.Title>  <i className="fa fa-pencil-square-o" aria-hidden="true"></i>  {modalTitle}
+                            </Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
                             {itemElement}
@@ -139,4 +143,4 @@ export class ItemList extends Component {
             </div>
         );
     }
-}
+};
