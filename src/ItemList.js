@@ -119,8 +119,8 @@ export class ItemList extends Component {
         return (
             <div>
                 <div>
-                    <Button bsStyle="success" className='fa fa-check pull-center' aria-hidden='true'
-                            onClick={this.newItem}> iHaveIt </Button>
+                    <Button bsStyle="success" bsSize="large" block className='fa fa-check pull-center add-button' aria-hidden='true'
+                            onClick={this.newItem}> Add </Button>
                 </div>
                 <Grid>
                     {items}
