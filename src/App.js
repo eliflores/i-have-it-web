@@ -43,7 +43,7 @@ class App extends Component {
 
     findItem = (itemId) => {
         return this.state.items.findIndex(i => {
-            return i.id === itemId;
+            return i.id == Number(itemId);
         });
     };
 
