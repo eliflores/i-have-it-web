@@ -2,13 +2,8 @@
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
 .App-header {
-  background-color: rgb(60, 72, 128);
+  background-color: #9DC3C2;
   height: 70px;
   padding: 20px;
   color: white;
@@ -24,8 +19,16 @@
   font-size: large;
 }
 
-.container {
-  width: 700px;
+.App-footer {
+  background-color: #9DC3C2;
+  padding: 20px 0;
+  color: #ffffff;
+  text-align: center;
+}
+
+footer {
+  margin-top: 300px;
+  font-size: 1em;
 }
 
 @keyframes App-logo-spin {
