@@ -28,7 +28,7 @@ export class ItemList extends Component {
 
     isEditingItem = () => {
         return this.state.action === 'edit';
-    }
+    };
 
     saveItem = (event) => {
         event.preventDefault();
@@ -45,7 +45,7 @@ export class ItemList extends Component {
             this.props.addItemHandler({name: itemName, quantity: itemQuantity})
                 .then(modalClose);
         }
-    }
+    };
 
     close = () => {
         this.setState({showModal: false});
@@ -68,7 +68,9 @@ export class ItemList extends Component {
     }
 
     renderItems = () => {
-        return this.props.items && this.props.items.map(i => {
+        return this.props.items && this.props.items
+            .sort((i1, i2) => i1.name.localeCompare(i2.name))
+            .map(i => {
             return (
                 <Item key={i.id}
                       name={i.name}
@@ -109,7 +111,7 @@ export class ItemList extends Component {
                 </FormGroup>
             </span>
         );
-    }
+    };
 
     render() {
         const items = this.renderItems();
