@@ -2,7 +2,12 @@
 
 ## Description 
 `iHaveIt` is my project for the WTMB JavaScript Crash Course! :) 
-This is the front-end side of the project!
+
+Have you ever bought or gotten something that you already had? Perhaps more than once? 
+Yes! I have too! For this reason, iHaveIt was created! 
+
+iHaveIt :heavy_check_mark: helps us track items like groceries, books, movies, etc. that we are not sure if we have
+already and that we may end up buying or getting again (sometimes multiple times!).
 
 ## Tech Stack 
 * [React v16.2.0](https://reactjs.org/)
