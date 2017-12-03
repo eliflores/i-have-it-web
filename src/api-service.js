@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const HOST = 'http://localhost:3000';
+const HOST = process.env.REACT_APP_API_HOST;
 
 const errorHandler = (error) => {
     console.log(error);
