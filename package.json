@@ -20,23 +20,21 @@
     "deploy": "gh-pages -d build"
   },
   "jest": {
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    },
     "verbose": true
   },
   "homepage": "https://mignonnesaurus.github.io/i-have-it-web",
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
     "babel-jest": "^22.1.0",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-preset-env": "^1.6.1",
+    "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "jest": "^22.1.4",
     "react-test-renderer": "^16.2.0"
-  },
-  "babel": {
-    "presets": [
-      "env"
-    ],
-    "plugins": []
   }
 }
