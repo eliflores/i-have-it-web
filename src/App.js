@@ -17,7 +17,7 @@ class App extends Component {
             const itemIndex = this.findItem(item.id);
             currentItems[itemIndex] = {...currentItems[itemIndex], ...item};
             this.setState({items: currentItems});
-            return Promise.resolve();
+            return Promisex.resolve();
         });
     };
 
