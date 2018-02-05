@@ -9,15 +9,34 @@
     "react": "^16.2.0",
     "react-bootstrap": "^0.31.5",
     "react-dom": "^16.2.0",
-    "react-scripts": "1.0.17"
+    "react-scripts": "1.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "jest",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
-  "homepage": "https://mignonnesaurus.github.io/i-have-it-web"
+  "jest": {
+    "verbose": true
+  },
+  "homepage": "https://mignonnesaurus.github.io/i-have-it-web",
+  "devDependencies": {
+    "babel-jest": "^22.1.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "jest": "^22.1.4",
+    "react-test-renderer": "^16.2.0"
+  },
+  "babel": {
+    "presets": [
+      "env"
+    ],
+    "plugins": []
+  }
 }
