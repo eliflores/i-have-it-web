@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 import {ItemList} from './ItemList'
-import {fetchItems, saveItem, deleteItem, addItem} from './api-service';
+import withApi from './AppDecorator'
 
 class App extends Component {
     constructor(props) {
@@ -12,18 +12,18 @@ class App extends Component {
     }
 
     saveItemHandler = (item) => {
-        return saveItem(item).then(res => {
+        return this.props.saveItem(item).then(() => {
             const currentItems = this.state.items.slice();
             const itemIndex = this.findItem(item.id);
             currentItems[itemIndex] = {...currentItems[itemIndex], ...item};
             this.setState({items: currentItems});
-            return Promisex.resolve();
+            return Promise.resolve();
         });
     };
 
     deleteItemHandler = (itemId) => {
-        deleteItem(itemId)
-            .then(res => {
+        this.props.deleteItem(itemId)
+            .then(() => {
                 const currentItems = this.state.items.slice();
                 const itemIndex = this.findItem(itemId);
                 currentItems.splice(itemIndex, 1);
@@ -32,7 +32,7 @@ class App extends Component {
     };
 
     addItemHandler = (item) => {
-        return addItem(item)
+        return this.props.addItem(item)
             .then(res => {
                 const currentItems = this.state.items.slice();
                 currentItems.push(res);
@@ -48,7 +48,7 @@ class App extends Component {
     };
 
     componentDidMount() {
-        fetchItems().then(res => {
+        this.props.fetchItems().then(res => {
             this.setState({items: res});
         });
     }
@@ -76,4 +76,4 @@ class App extends Component {
     }
 }
 
-export default App;
+export default withApi(App);
