@@ -14,6 +14,12 @@ already and that we may end up buying or getting again (sometimes multiple times
 * [Font awesome v4.7.0](http://fontawesome.io/)
 * [React bootstrap v0.31.5](https://react-bootstrap.github.io/)
 
+
+## How to start the app
+1. Clone the app repository
+2. run `npm start `
+    * The app will run in the port `3000` by default
+
 ### Back-end
 
 The Back-end side of the application was developed in a separate repository, [here](https://github.com/mignonnesaurus/i-have-it).
